@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="cs" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interaktivní tutoriál: Komentáře v kódu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Code -->
+    <!-- Application Structure Plan: Aplikace je strukturována jako jednostránkový vertikální tutoriál se třemi hlavními sekcemi (HTML, CSS, JS). Navigace v hlavičce umožňuje rychlý přechod na konkrétní sekci. Tento design byl zvolen, protože nejlépe odpovídá lineární a vzdělávací povaze zdrojového materiálu. Uživatel může snadno procházet obsah krok za krokem. Interaktivní tlačítka pro kopírování kódu zvyšují uživatelskou přívětivost a praktické využití. -->
+    <!-- Visualization & Content Choices: Informace ze zdrojového reportu (tutoriálu) jsou prezentovány pomocí textových bloků pro vysvětlení a `<pre><code>` bloků pro ukázky kódu. Cílem je informovat a demonstrovat. Interakce spočívá v tlačítkách pro kopírování, což je praktická funkce pro výuku. Tato metoda je nejvhodnější, protože report neobsahuje kvantitativní data a nevyžaduje grafy. Vše je implementováno pomocí HTML, Tailwind CSS a vanilkového JavaScriptu. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .code-block {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        .code-block .copy-button {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background-color: #4a5568;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .code-block .copy-button:hover {
+            background-color: #2d3748;
+        }
+        .comment {
+            color: #5c6370;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto px-4 py-8 md:py-12 max-w-4xl">
+
+        <header class="text-center mb-12 md:mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold text-stone-900 mb-4">Průvodce komentáři v kódu</h1>
+            <p class="text-lg text-stone-600">Naučte se psát poznámky v HTML, CSS a JavaScriptu jako profík.</p>
+            <nav class="mt-8 flex justify-center gap-4 md:gap-6">
+                <a href="#html" class="nav-link px-4 py-2 bg-white border border-stone-200 rounded-md hover:bg-stone-100 hover:border-stone-300 transition">HTML</a>
+                <a href="#css" class="nav-link px-4 py-2 bg-white border border-stone-200 rounded-md hover:bg-stone-100 hover:border-stone-300 transition">CSS</a>
+                <a href="#js" class="nav-link px-4 py-2 bg-white border border-stone-200 rounded-md hover:bg-stone-100 hover:border-stone-300 transition">JavaScript</a>
+            </nav>
+        </header>
+
+        <main class="space-y-16">
+
+            <section id="html">
+                <h2 class="text-3xl font-bold mb-4 text-stone-900 border-l-4 border-amber-500 pl-4">HTML Komentáře</h2>
+                <p class="text-stone-700 mb-6">
+                    V této sekci se naučíte, jak vkládat komentáře přímo do vaší HTML struktury. Komentáře jsou skvělým způsobem, jak si zanechat poznámky o různých částech stránky, vysvětlit složitější kód nebo dočasně "vypnout" část kódu, aniž byste ji museli smazat. Prohlížeč tyto poznámky kompletně ignoruje a uživatel je na stránce nikdy neuvidí.
+                </p>
+                <div class="code-block">
+                    <button class="copy-button" data-code-id="html-code">Zkopírovat</button>
+                    <pre><code id="html-code"><span class="comment">&lt;!-- Toto je komentář. Slouží pro poznámky přímo v kódu. --&gt;</span>
+
+&lt;div class="container"&gt;
+    &lt;h1&gt;Nadpis stránky&lt;/h1&gt;
+    
+    <span class="comment">&lt;!-- Zde začíná navigační menu --&gt;</span>
+    &lt;nav&gt;
+        &lt;!-- Odkazy budou přidány později --&gt;
+    &lt;/nav&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+                <div class="mt-4 p-4 bg-amber-100 border-l-4 border-amber-500 text-amber-800 rounded-r-lg">
+                    <p><strong class="font-bold">Důležité:</strong> V HTML nesmíte vnořovat komentáře jeden do druhého. Každý komentář musí být samostatně otevřen (`&lt;!--`) a uzavřen (`--&gt;`).</p>
+                </div>
+            </section>
+
+            <section id="css">
+                <h2 class="text-3xl font-bold mb-4 text-stone-900 border-l-4 border-sky-500 pl-4">CSS Komentáře</h2>
+                <p class="text-stone-700 mb-6">
+                    Zde se dozvíte, jak používat komentáře v CSS souborech. Komentáře ve stylech jsou nepostradatelné pro organizaci vašeho kódu. Můžete jimi oddělovat logické bloky stylů (např. pro hlavičku, tlačítka, patičku), vysvětlovat, proč jste použili konkrétní hodnotu, nebo si zanechat poznámku pro budoucí úpravy. Stejně jako v HTML, prohlížeč tyto komentáře ignoruje.
+                </p>
+                <div class="code-block">
+                    <button class="copy-button" data-code-id="css-code">Zkopírovat</button>
+                    <pre><code id="css-code"><span class="comment">/* Hlavní paleta barev */</span>
+:root {
+    --primary-color: #3498db;
+    --background-color: #f1f5f9;
+}
+
+body {
+    background-color: var(--background-color);
+    <span class="comment">/* Nastavení základního písma pro celou stránku */</span>
+    font-family: 'Inter', sans-serif;
+}
+
+<span class="comment">/* Styly pro všechna tlačítka */</span>
+.button {
+    background-color: var(--primary-color);
+    color: white; <span class="comment">/* Barva textu */</span>
+}</code></pre>
+                </div>
+            </section>
+
+            <section id="js">
+                <h2 class="text-3xl font-bold mb-4 text-stone-900 border-l-4 border-emerald-500 pl-4">JavaScript Komentáře</h2>
+                 <p class="text-stone-700 mb-6">
+                    V této poslední části se seznámíte se dvěma typy komentářů v JavaScriptu. Jsou klíčové pro popis logiky vašich skriptů – co dělají jednotlivé funkce, jaký je účel proměnných nebo jak fungují složité algoritmy. JavaScript nabízí flexibilitu pro krátké i delší poznámky.
+                </p>
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Jednořádkový komentář</h3>
+                        <p class="text-stone-700 mb-4">Začíná se dvěma lomítky (`//`) a platí od nich až do konce řádku. Ideální pro krátké, rychlé poznámky.</p>
+                        <div class="code-block">
+                            <button class="copy-button" data-code-id="js-single-line-code">Zkopírovat</button>
+                            <pre><code id="js-single-line-code"><span class="comment">// Deklarace proměnné pro uložení jména uživatele</span>
+let userName = "Jiřík";
+
+<span class="comment">// Vypíše pozdrav do konzole prohlížeče</span>
+console.log("Ahoj, " + userName);</code></pre>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Víceřádkový komentář</h3>
+                        <p class="text-stone-700 mb-4">Začíná `/*` a končí `*/`. Všechno mezi tím je komentář, i když se rozprostírá přes více řádků. Hodí se pro detailní popis funkcí nebo složitějších částí kódu.</p>
+                        <div class="code-block">
+                            <button class="copy-button" data-code-id="js-multi-line-code">Zkopírovat</button>
+                            <pre><code id="js-multi-line-code"><span class="comment">/*
+ * Tato funkce sečte dvě čísla a vrátí jejich součet.
+ * @param {number} a - První číslo
+ * @param {number} b - Druhé číslo
+ * @returns {number} Součet čísel a a b.
+*/</span>
+function secti(a, b) {
+    return a + b;
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center mt-16 pt-8 border-t border-stone-200">
+            <p class="text-stone-500">Vytvořeno s láskou pro Tebe, Gemini 🤖</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const copyButtons = document.querySelectorAll('.copy-button');
+
+            copyButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const codeId = button.dataset.codeId;
+                    const codeElement = document.getElementById(codeId);
+                    const codeToCopy = codeElement.innerText;
+
+                    navigator.clipboard.writeText(codeToCopy).then(() => {
+                        button.textContent = 'Zkopírováno!';
+                        button.style.backgroundColor = '#38a169';
+                        setTimeout(() => {
+                            button.textContent = 'Zkopírovat';
+                            button.style.backgroundColor = '#4a5568';
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Nepodařilo se zkopírovat text: ', err);
+                    });
+                });
+            });
+
+            const navLinks = document.querySelectorAll('a.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

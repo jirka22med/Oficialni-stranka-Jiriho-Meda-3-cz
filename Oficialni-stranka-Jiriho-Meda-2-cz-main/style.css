@@ -1,0 +1,1550 @@
+/* Reset a základní styly */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* --- GLOBÁLNÍ ZÁKAZ ANIMACÍ A PŘECHODŮ (experimentální) --- */
+/* NA POŽADAVEK JIŘÍKA */
+
+/* --- KONEC GLOBÁLNÍHO ZÁKAZU ANIMACÍ A PŘECHODŮ --- */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.5;
+    color: #333;
+    background-color: #42a5f5; /* Toto zajistí jednotnou světle modrou barvu bez přechodu */
+    min-height: 100vh;
+    
+    text-align: center;
+    font-weight: 700;
+}
+
+:root {
+    --header-bg-color: rgba(0,0,0,0.1); 
+    --text-color: black;
+    --border-color: rgba(255,255,255,0.2);
+    --secondary-text-color: rgba(255,255,255,0.8);
+    --nav-bg-color: rgba(0,0,0,0.3);
+    --primary-gradient: linear-gradient(45deg, #667eea, #764ba2);
+    --secondary-gradient: linear-gradient(45deg, #42a5f5, #1e88e5);
+    --danger-gradient: linear-gradient(45deg, #ef5350, #e53935);
+}
+
+header {
+    /* background-color: var(--header-bg-color);*/
+    color: var(--text-color);
+    text-align: center;
+    /* Původní padding: 2rem 1rem; */
+    padding: 1.5rem 1rem; /* ZMENŠENO: Snížili jsme svislý padding uvnitř headeru */
+    /* border-bottom: 1px solid var(--border-color);*/
+    /* margin-top: -25px; -- TOTO JSME ODSTRANILI NA TVŮJ POŽADAVEK */
+    font-weight: 600;
+}
+header h1 {
+    font-size: 2.5em;
+    text-align: center;
+    
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+header p {
+    font-size: 1.1em;
+    color: black;
+    font-weight: bold;
+}
+
+nav { 
+    /* background-color: var(--nav-bg-color);*/
+    /* Původní padding: 0.5rem 0; */
+    padding: 0.3rem 0; /* ZMENŠENO: Snížili jsme svislý padding uvnitř nav */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    /*box-shadow: 0 2px 4px rgba(0,0,0,0.1);*/
+    font-weight: 600;
+    margin-bottom: 1rem; /* PŘIDÁNO: Přidali jsme mezeru pod navigační lištu */
+}
+
+.nav-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    
+    gap: 5px;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.nav-link, #edit-mode-toggle-btn, #login-button, #jirka-rezim-obrazovky{
+    color: black;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    font-size: 0.9rem;
+    
+}
+
+.nav-link:hover, .nav-link.active{
+    background: rgba(255, 255, 255, 0.25);
+    
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+#edit-mode-toggle-btn:hover , #login-button:hover, #jirka-rezim-obrazovky:hover{
+    
+  background: rgba(255, 255, 255, 0.25);
+    
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);  
+}
+
+#loading-indicator {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    z-index: 10000;
+    font-size: 1.1rem;
+}
+
+.hidden {
+    display: none !important;
+}
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/*main {
+    padding: 2rem 0;
+    
+    min-height: calc(100vh - 140px - 70px);
+    
+    width: 100%;
+}*/
+
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 1rem;
+    
+    width: 100%;
+}
+
+section {
+    display: none;      
+    visibility: hidden;  
+    position: absolute;    
+    top: 0;                
+    left: 0;              
+    width: 100%;          
+    background: rgba(255, 255, 255, 0.95);
+    /* margin: 1rem 0; -- TOTO JSME ODSTRANILI NA TVŮJ POŽADAVEK */
+    padding: 1.2rem 1.5rem; /* ZMENŠENO: Zmenšili jsme svislý padding uvnitř sekce (bylo 1.5rem) */
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    opacity: 0;
+    
+    margin-bottom: 1rem; /* PŘIDÁNO: Používáme margin-bottom pro mezeru mezi sekcemi */
+}
+
+
+section.active {
+    display: block;    
+    visibility: visible;  
+    position: relative;    
+    opacity: 1;
+    
+}  
+
+
+section h2, section h3 {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+section h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+section h2 {
+    font-size: 2rem;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 0.5rem;
+    color: #4a5568;
+}  
+
+.editor-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+#html-editor {
+    width: 100%;
+    height: 400px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    resize: vertical;
+    background-color: #fdfdfd;
+    color: #333;
+}
+
+#html-preview {
+    width: 100%;
+    height: 400px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background: white;
+}
+
+.button ,button {
+    background: var(--primary-gradient);
+    color: white ;  
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    
+    
+    
+    margin: 0.5rem;
+    text-decoration: none;  
+    display: inline-block;
+}
+
+.button:hover, button:hover   {
+    
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.btn-secondary {
+    background: var(--secondary-gradient);
+}
+
+.btn-danger {
+    background: var(--danger-gradient);
+}
+
+.gallery-controls {
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+#newImageUrl {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.75rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333;
+}
+
+#gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.gallery-image-wrapper {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    
+    background-color: #e0e0e0;
+}
+
+.gallery-image-wrapper:hover {
+    
+}
+
+.gallery-image-wrapper img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    cursor: pointer;
+    display: block;
+}
+
+.delete-img-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(220,53,69,0.8);  
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.delete-img-btn:hover {
+    background: #b02a37;  
+}
+
+.saved-code-item {
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    
+    width: 100%;
+}
+
+.saved-code-item:hover {
+    background: #e9ecef;
+    
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.item-header h3 {
+    color: #667eea;
+    font-size: 1.25rem;
+    margin-bottom: 0;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+.actions .button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+/* Kompletní transformace tabulky na permanentní grid */
+
+/* Základní styl pro tabulku */
+#links-table {
+    width: 100%;
+    max-width: 1400px;
+    margin: 1rem auto 0 auto;
+    border-collapse: separate;
+    background: #f8fafc;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+/* Skryj thead úplně - už ho nepotřebujeme */
+#links-table thead {
+    display: none;
+}
+
+/* Transformuj tbody na grid kontejner */
+#links-table tbody {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.5rem;
+    padding: 2rem;
+    background: #f8fafc;
+}
+
+/* Každý řádek (tr) jako grid kartička */
+#links-table tbody tr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+    min-height: 140px;
+}
+
+/* Hover efekt pro kartičky */
+#links-table tbody tr:hover {
+     
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+    border-color: #667eea;
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+}
+
+/* Reset všech td stylů */
+#links-table tbody td {
+    border: none;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+}
+
+/* Ikona - první buňka */
+#links-table tbody td:nth-child(1) {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+/* Název odkazu - druhá buňka */
+#links-table tbody td:nth-child(2) {
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+    line-height: 1.2;
+    min-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* URL adresa - třetí buňka */
+#links-table tbody td:nth-child(3) {
+    font-size: 0.75rem;
+    color: #718096;
+    word-break: break-all;
+    line-height: 1.3;
+    margin-bottom: auto;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#links-table tbody td:nth-child(3) a {
+    color: #5a67d8;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    background: rgba(90, 103, 216, 0.1);
+}
+
+#links-table tbody td:nth-child(3) a:hover {
+    color: #434190;
+    text-decoration: underline;
+    background: rgba(90, 103, 216, 0.2);
+}
+
+/* Akce tlačítka - čtvrtá buňka (edit mode) */
+#links-table tbody td:nth-child(4) {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.edit-mode-only {
+    display: none;
+}
+
+/* Když je edit mode aktivní */
+body.edit-mode .edit-mode-only {
+    display: flex;
+}
+
+body.edit-mode #links-table tbody tr {
+    min-height: 180px; /* Více místa pro tlačítka */
+}
+
+/* Responzivní design */
+@media (max-width: 1300px) {
+    #links-table tbody {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1.2rem;
+    }
+}
+
+@media (max-width: 1100px) {
+    #links-table tbody {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 900px) {
+    #links-table tbody {
+        grid-template-columns: repeat(3, 1fr);
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    #links-table tbody {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+        padding: 1rem;
+    }
+    
+    #links-table tbody tr {
+        padding: 1rem 0.5rem;
+        min-height: 120px;
+    }
+}
+
+@media (max-width: 400px) {
+    #links-table tbody {
+        grid-template-columns: 1fr;
+    }
+}
+.modal { 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; 
+    opacity: 0;
+    visibility: hidden;
+     
+}
+
+.modal.visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    max-width: 90%;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    
+}
+.modal.visible .modal-content {
+    transform: scale(1);
+}
+
+.modal input[type="text"], .modal input[type="url"], .modal input[type="email"], .modal input[type="password"] { 
+    width: 100%;
+    padding: 0.75rem;
+    margin: 1rem 0;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333;
+}
+.modal .modal-buttons { 
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+#image-modal { 
+    background: rgba(0,0,0,0.9);
+}
+
+#image-modal .modal-content {
+    background: transparent;
+    max-width: 140%;
+    max-height: 140%;
+    padding: 0;
+    box-shadow: none; 
+}
+
+#modal-img {
+    max-width: 90%;
+    max-height: 70vh;
+    border-radius: 10px;
+    display: block;
+    margin: auto;
+    margin-top: 40px;
+}
+
+.modal-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    width: 100%;
+    max-width: 100%; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.modal-nav button {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    border: none;
+    padding: 0.8rem; 
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.5rem; 
+    width: 50px; 
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.modal-nav button:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+footer {
+    /*background: rgba(0,0,0,0.8);*/
+    /*backdrop-filter: blur(5px);*/
+   /* -webkit-backdrop-filter: blur(5px);*/
+    color: black;
+    text-align: center;
+    padding: 2rem 0;
+    position: relative;
+    width: 100%;
+    margin-top: -45px;
+}
+
+#user-id-display { 
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem; 
+    color: white;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    margin-top: 0.5rem;
+    
+    /* Zakázání označování textu */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+#user-id-display span {
+    font-weight: bold;
+}
+
+/* Nové styly pro editaci inline obsahu */
+[contenteditable="true"] {
+    outline: 2px dashed rgba(102, 126, 234, 0.5); /* Modrý rámeček pro editovatelné prvky */
+    padding: 2px;
+    min-width: 1em; /* Zaručuje, že prázdný prvek je stále viditelný */
+    transition: outline 0.2s ease;
+}
+[contenteditable="true"]:hover {
+    outline-color: rgba(102, 126, 234, 0.8);
+}
+[contenteditable="true"]:focus {
+    outline: 2px solid #667eea; /* Pevný modrý rámeček při aktivní editaci */
+    /*background-color: rgba(255, 255, 255, 0.8);*/
+}
+
+.edit-controls {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    gap: 5px;
+    z-index: 10;
+}
+
+.edit-controls button {
+    padding: 5px 8px;
+    font-size: 0.8em;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: black;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+.edit-controls button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.editable-image-wrapper {
+    position: relative;
+    display: inline-block; /* Aby obal reagoval na velikost obrázku */
+}
+.editable-image-wrapper .edit-icon {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.2s;
+    z-index: 5;
+}
+.editable-image-wrapper .edit-icon:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.editable-link {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px; /* Místo pro edit ikonu */
+}
+.editable-link .edit-icon {
+    position: absolute;
+    right: -20px; /* Posune ikonu vedle odkazu */
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: black;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: background-color 0.2s;
+    z-index: 5;
+}
+.editable-link .edit-icon:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Skrytí/Zobrazení editačních prvků */
+body:not(.edit-mode) [contenteditable="true"],
+body:not(.edit-mode) .edit-controls,
+body:not(.edit-mode) .delete-img-btn,
+body:not(.edit-mode) #data-management,
+body:not(.edit-mode) #addImageUrlBtn,
+body:not(.edit-mode) #newImageUrl,
+body:not(.edit-mode) #save-code-btn,
+body:not(.edit-mode) .actions .button,
+body:not(.edit-mode) .editable-image-wrapper .edit-icon,
+body:not(.edit-mode) .editable-link .edit-icon,
+body:not(.edit-mode) .edit-mode-only { /* NOVINKA: Skrýváme i edit-mode-only prvky */
+    display: none !important;
+}
+
+/* Nová třída pro zobrazení edit módu */
+body.edit-mode #edit-mode-toggle-btn {
+    display: block; /* Zobrazí tlačítko "Zavřít" */
+}
+body.edit-mode .edit-controls,
+body.edit-mode .delete-img-btn,
+body.edit-mode #data-management,
+body.edit-mode #addImageUrlBtn,
+body.edit-mode #newImageUrl,
+body.edit-mode #save-code-btn,
+body.edit-mode .actions .button,
+body.edit-mode .editable-image-wrapper .edit-icon,
+body.edit-mode .editable-link .edit-icon {
+    display: flex; /* Zobrazí ostatní editační prvky */
+}
+body.edit-mode .editable-image-wrapper .edit-icon,
+body.edit-mode .editable-link .edit-icon {
+    display: flex; /* Specificky pro ikony */
+}
+body.edit-mode .edit-mode-only { /* NOVINKA: Zobrazujeme edit-mode-only prvky v edit módu */
+    display: table-cell !important; /* Pro buňky tabulky */
+}
+
+/* KOMPLETNÍ MEDIA QUERIES PRO PLNOU ŠÍŘKU */
+
+/* Tablet landscape a větší */
+@media (min-width: 768px) {
+    .editor-container {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .container {
+        padding: 0 2rem;
+    }
+    
+    section {
+        padding: 2rem;
+        margin: 2rem 0;
+    }
+    
+    #gallery-container {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+/* Tablet portrait a menší - DVOUŘÁDKOVÁ NAVIGACE + VYLEPŠENÉ ODKAZY */
+@media (max-width: 767px) {
+    body {
+        padding-top: 0;
+    }
+    
+    .container {
+        max-width: 100%;
+        padding: 0 0.5rem;
+        margin: 0;
+    }
+    
+    .nav-container {
+        padding: 0 0.5rem;
+        /* KLÍČOVÁ ZMĚNA: Vytvoříme grid layout pro dvouřádkovou navigaci */
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 0.5rem;
+        justify-items: center;
+        align-items: center;
+    }
+    
+    header {
+        position: relative;
+        padding: 1rem 0.5rem;
+        margin-top: 0;
+    }
+    
+    header h1 { 
+        font-size: 2rem; 
+        margin-top: 0;
+    }
+    
+    header p { 
+        font-size: 1rem; 
+    }
+
+    nav {
+        position: relative;
+        top: 0;
+        padding: 1rem 0; /* Zvětšený padding pro dvouřádkovou navigaci */
+    }
+
+    .nav-link, #edit-mode-toggle-btn, #login-button, #jirka-rezim-obrazovky  {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.85rem;
+        margin: 0; /* Odstraníme margin, protože používáme grid gap */
+        width: 100%; /* Tlačítka vyplní celou šířku grid buňky */
+        text-align: center;
+        white-space: nowrap; /* Zabráníme zalomení textu */
+        overflow: hidden;
+        text-overflow: ellipsis; /* Přidáme tři tečky při překročení */
+    }
+    
+    main {
+        margin-top: 0;
+        padding: 1rem 0;
+        width: 100%;
+    }
+
+    section {
+        padding: 1rem;
+        margin: 0.5rem 0;
+        border-radius: 10px;
+        width: 100%;
+    }
+
+    section h1 {
+        font-size: 1.8rem;
+    }
+    
+    section h2 {
+        font-size: 1.5rem;
+    }
+    
+    .editor-container {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    #html-editor, #html-preview {
+        height: 300px;
+    }
+    
+    .gallery-controls {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    #newImageUrl {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    #gallery-container {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 0.5rem;
+    }
+    
+    .item-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    /* VYLEPŠENÉ EXTERNÍ ODKAZY */
+    #links-table {
+        font-size: 0.9rem;
+        display: table;
+        overflow-x: auto;
+        width: 100%;
+        table-layout: fixed; /* Fixní layout pro lepší kontrolu šířek */
+    }
+    
+    #links-table th,
+    #links-table td {
+        padding: 0.5rem;
+        white-space: nowrap;
+        overflow: hidden; /* Skryje obsah, který přeteče */
+        text-overflow: ellipsis; /* Přidá tři tečky */
+        max-width: 10; /* Umožní fungování ellipsis */
+    }
+    
+    /* Specifické šířky pro sloupce */
+    #links-table th:first-child,
+    #links-table td:first-child {
+        width: 30%; /* Název */
+        min-width: 80px;
+    }
+    
+    #links-table th:nth-child(2),
+    #links-table td:nth-child(2) {
+        width: 50%; /* URL - největší prostor */
+        min-width: 120px;
+    }
+    
+    #links-table th:last-child,
+    #links-table td:last-child {
+        width: 20%; /* Popis */
+        min-width: 60px;
+    }
+    
+    /* Pro odkazy v buňkách */
+    #links-table a {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
+    }
+    
+    .modal-content {
+        width: 95%;
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    .modal .modal-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .modal-nav {
+        padding: 0 1rem;
+    }
+}
+
+/* Mobilní zařízení - TAKÉ S DVOUŘÁDKOVOU NAVIGACÍ + VYLEPŠENÉ ODKAZY */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 0.25rem;
+    }
+    
+    .nav-container {
+        padding: 0 0.25rem;
+        /* Zachováváme grid layout i pro mobilní zařízení */
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 0.3rem;
+        justify-items: center;
+        align-items: center;
+    }
+    
+    .nav-link, #edit-mode-toggle-btn, #login-button, #jirka-rezim-obrazovky  {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.4rem;
+        margin: 0;
+        width: 100%;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    header {
+        padding: 0.5rem 0.25rem;
+    }
+    
+    header h1 {
+        font-size: 1.5rem;
+    }
+    
+    header p {
+        font-size: 0.9rem;
+    }
+    
+    nav {
+        padding: 0.8rem 0; /* Přizpůsobený padding pro menší obrazovky */
+    }
+    
+    section {
+        padding: 0.75rem;
+        margin: 0.25rem 0;
+    }
+    
+    section h1 {
+        font-size: 1.5rem;
+    }
+    
+    section h2 {
+        font-size: 1.3rem;
+    }
+    
+    #gallery-container {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .gallery-image-wrapper img {
+        height: 150px;
+    }
+    
+   /* .button, button {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+        margin: 0.25rem;
+        width: auto;
+    }*/
+    
+    .modal-content {
+        padding: 1rem;
+        width: 98%;
+        margin: 0.5rem;
+    }
+    
+    .modal input[type="text"], 
+    .modal input[type="url"], 
+    .modal input[type="email"], 
+    .modal input[type="password"] {
+        font-size: 16px; /* Zabraňuje zoomování na iOS */
+        padding: 0.75rem;
+    }
+    
+    /* VYLEPŠENÉ EXTERNÍ ODKAZY PRO MOBIL */
+    #links-table {
+        font-size: 0.8rem;
+        display: table;
+        overflow-x: auto;
+        width: 100%;
+        table-layout: fixed;
+    }
+    
+    #links-table th,
+    #links-table td {
+        padding: 0.25rem;
+        white-space: nowrap;
+        overflow: hidden; /* Skryje obsah, který přeteče */
+        text-overflow: ellipsis; /* Přidá tři tečky */
+        max-width: 0; /* Umožní fungování ellipsis */
+    }
+    
+    /* Upravené šířky pro mobilní */
+    #links-table th:first-child,
+    #links-table td:first-child {
+        width: 25%; /* Název - menší */
+        min-width: 60px;
+    }
+    
+    #links-table th:nth-child(2),
+    #links-table td:nth-child(2) {
+        width: 55%; /* URL - více prostoru */
+        min-width: 100px;
+    }
+    
+    #links-table th:last-child,
+    #links-table td:last-child {
+        width: 20%; /* Popis */
+        min-width: 50px;
+    }
+    
+    /* Pro odkazy v buňkách */
+    #links-table a {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
+    }
+    
+    .modal-nav button {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+}
+
+/* Velmi malé displeje - TAKÉ S DVOUŘÁDKOVOU NAVIGACÍ + SKRYTÝ POPIS U ODKAZŮ */
+@media (max-width: 320px) {
+    .container {
+        padding: 0 0.1rem;
+    }
+    
+    .nav-container {
+        padding: 0 0.1rem;
+        /* Grid layout zůstává i pro velmi malé displeje */
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 0.2rem;
+        justify-items: center;
+        align-items: center;
+    }
+    
+    .nav-link, #edit-mode-toggle-btn, #login-button, #jirka-rezim-obrazovky  {
+        font-size: 0.7rem;
+        padding: 0.4rem 0.2rem;
+        margin: 0;
+        width: 100%;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    nav {
+        padding: 0.6rem 0;
+    }
+    
+    header h1 {
+        font-size: 1.3rem;
+    }
+    
+    section {
+        padding: 0.5rem;
+    }
+    
+    #gallery-container {
+        grid-template-columns: 1fr;
+    }
+    
+    /* EXTRÉMNÍ OPTIMALIZACE ODKAZŮ PRO VELMI MALÉ DISPLEJE */
+    #links-table {
+        font-size: 0.75rem;
+        display: table;
+        overflow-x: auto;
+        width: 100%;
+        table-layout: fixed;
+    }
+    
+    #links-table th,
+    #links-table td {
+        padding: 0.2rem;
+        white-space: nowrap;
+        overflow: hidden; /* Skryje obsah, který přeteče */
+        text-overflow: ellipsis; /* Přidá tři tečky */
+        max-width: 0; /* Umožní fungování ellipsis */
+    }
+    
+    /* Extrémně malé displeje - skryjeme popis úplně */
+    #links-table th:last-child,
+    #links-table td:last-child {
+        display: none; /* Skryje sloupec s popisem */
+    }
+    
+    /* Přerozdělíme prostor mezi název a URL */
+    #links-table th:first-child,
+    #links-table td:first-child {
+        width: 35%; /* Název */
+        min-width: 70px;
+    }
+    
+    #links-table th:nth-child(2),
+    #links-table td:nth-child(2) {
+        width: 65%; /* URL - maximum prostoru */
+        min-width: 120px;
+    }
+    
+    /* Pro odkazy v buňkách */
+    #links-table a {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
+    }
+}
+
+/* KOMPLETNÍ MEDIA QUERIES PRO DATA MANAGEMENT */
+
+
+        /* modals.css (nebo style.css) */
+
+/* === MODAL OKNA CSS === */
+
+/* Základní modal overlay */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    
+}
+
+/* Modal aktivní stav */
+.modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Modal obsah */
+.modal-content {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border: 2px solid #00ffff;
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 
+        0 10px 30px rgba(0, 255, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    position: relative;
+    transform: scale(0.7);
+    
+    text-align: center;
+}
+
+/* Modal content animace při aktivaci */
+.modal.active .modal-content {
+    transform: scale(1);
+}
+
+/* Modal nadpis */
+.modal-content h3 {
+    color: #00ffff;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+/* Modal input pole */
+.modal-content input {
+    width: 100%;
+    padding: 12px;
+    margin: 15px 0;
+     font-weight: bold;
+    border: 2px solid #333;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-family: 'Courier New', monospace;
+     
+    caret-color: #00ffff;
+}
+
+.modal-content input:focus {
+    outline: none;
+    border-color: #00ffff;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    animation: input-glow 2s infinite;
+}
+
+.modal-content input::placeholder {
+    color: #888;
+}
+
+/* Animace pro input když je aktivní */
+@keyframes input-glow {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+    }
+}
+
+/* Blikající kurzor efekt pro input */
+.modal-content input:focus {
+    outline: none;
+    border-color: #00ffff;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    animation: input-glow 2s infinite, caret-blink 1s infinite;
+}
+
+/* Blikání kurzoru v input poli */
+@keyframes caret-blink {
+    0%, 50% {
+        caret-color: #00ffff;
+    }
+    51%, 100% {
+        caret-color: transparent;
+    }
+}
+
+/* Error zpráva */
+.error-message {
+    color: #ff4444;
+    font-size: 0.9rem;
+    margin: 10px 0;
+    text-shadow: 0 0 5px rgba(255, 68, 68, 0.5);
+    min-height: 20px;
+}
+
+/* Modal tlačítka kontejner */
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+/* Modal tlačítka základní styl */
+.modal-actions .button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 100px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Primární tlačítko (OK) */
+.modal-actions .btn-primary {
+    background: linear-gradient(135deg, #00ffff 0%, #0088ff 100%);
+    color: #000;
+    box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
+}
+
+.modal-actions .btn-primary:hover {
+    background: linear-gradient(135deg, #33ffff 0%, #0099ff 100%);
+    box-shadow: 0 6px 20px rgba(0, 255, 255, 0.5);
+    
+}
+
+/* Sekundární tlačítko (Zrušit) */
+.modal-actions .btn-secondary {
+    background: linear-gradient(135deg, #666 0%, #444 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-actions .btn-secondary:hover {
+    background: linear-gradient(135deg, #777 0%, #555 100%);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+     
+}
+
+/* Zavírací křížek (pokud budeš chtít přidat) */
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: #00ffff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+/* Responsivní design pro mobily */
+@media (max-width: 600px) {
+    .modal-content {
+        margin: 20px;
+        padding: 20px;
+        max-width: none;
+        width: calc(100% - 40px);
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .modal-actions .button {
+        width: 100%;
+        max-width: 200px;
+    }
+}
+
+/* Animace pro loading stav */
+.modal-loading {
+    pointer-events: none;
+}
+
+.modal-loading .modal-content {
+    opacity: 0.7;
+}
+
+.modal-loading .button {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+      .portfolio-video-container {
+    position: relative;
+    width: 250px;
+    height: 150px;
+    overflow: hidden;
+    margin-left: auto; /* Vycentruje kontejner */
+    margin-right: auto; /* Vycentruje kontejner */
+    background: #000; /* Pozadí, pokud se video nenačte okamžitě */
+    margin-bottom: 1rem; /* Mezera pod videem */
+}
+
+.portfolio-video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Tablet - střední obrazovky */
+@media (max-width: 768px) {
+    .portfolio-video-container {
+        width: 350px;
+        height: 270px;
+    }
+}
+
+/* Mobilní telefony - malé obrazovky */
+@media (max-width: 480px) {
+    .portfolio-video-container {
+        width: 255px;
+        height: 165px;
+         
+    }
+}
+
+/* Velmi malé mobily */
+@media (max-width: 320px) {
+    .portfolio-video-container {
+        width: 255px;
+        height: 165px;
+         
+    }
+ 
+/* --- VYLEPŠENÝ CSS PRO MODAL "Upravit URL odkazu" --- */
+/* Základní CSS pro modální okno úpravy URL */
+
+
+ 
+/*tady je konec moladr okan??*
+    
+/* Styly pro rodičovský kontejner obrázku */
+.kontejner-obrazek {
+    width: 450px;       /* Pevná šířka kontejneru */
+    height: 250px;      /* Pevná výška kontejneru */
+    overflow: hidden;   /* Klíčové! Ořízne obrázek, pokud je větší než kontejner */
+    margin: 10px auto;  /* Vycentruje kontejner a přidá mezery */
+    border-radius: 4px; /* Jen kosmetika, abys měl pěkný rámeček */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Jemný stín */
+}
+
+/* Styly pro samotný obrázek UVNITŘ kontejneru */
+.kontejner-obrazek .project-image {
+    width: 100%;        /* Obrázek vyplní 100% šířky SVÉHO RODIČE (.kontejner-obrazek) */
+    height: 100%;       /* Obrázek vyplní 100% výšky SVÉHO RODIČE (.kontejner-obrazek) */
+    object-fit: cover;  /* MEGA KLÍČOVÉ! Zachová poměr stran a vyplní kontejner, ořízne přesahy */
+    display: block;     /* Pomáhá s odstraněním nežádoucích mezer */
+}
+    .custom-button {
+    background-color: #007bff; /* Pěkná modrá barva */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    
+}
+
+.custom-button:hover {
+    background-color: #0056b3;
+    
+}
+ 
