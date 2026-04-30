@@ -1,0 +1,1 @@
+# Oficialni-stranka-Jiriho-Meda-3-cz
